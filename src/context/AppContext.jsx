@@ -10,11 +10,13 @@ export const AppContextProvider = ({ children }) => {
   const currency = import.meta.VITE_CURRENCY;
 
   const navigate = useNavigate();
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(null);
   const [isSeller, setIsSeller] = useState(false); // ✅ Fixed camelCase convention
-  const [showUserLogin, setshowUserLogin] = useState(false);
+  const [showUserLogin, setShowUserLogin] = useState(false);
   const [products, setProducts] = useState([])
+
   const [cartItems, setCartItems] = useState({})
+  const [searchQuery, setSearchQuery] = useState({})
 
   // Fetch All Products
   const fetchProducts = async ()=>{
@@ -22,7 +24,7 @@ export const AppContextProvider = ({ children }) => {
   }
 
   //Add Products to Cart
-const addToCart = ()=>{
+const addToCart = (itemId)=>{
   let cartData = structuredClone(cartItems);
 
   if(cartData[itemId]){
@@ -62,8 +64,8 @@ setCartItems(cartData)
       fetchProducts()
   },[])
 
-  const value = { navigate, user, setUser, isSeller, setIsSeller, setshowUserLogin, 
-    showUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems }; // ✅ Match naming
+  const value = { navigate, user, setUser, isSeller, setIsSeller, setShowUserLogin, 
+    showUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery }; // ✅ Match naming
 
   return (
     <AppContext.Provider value={value}>

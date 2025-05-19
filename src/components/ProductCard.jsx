@@ -45,23 +45,23 @@ const ProductCard = ({ product }) => {
           <div className="text-indigo-500">
             {!cartItems[product._id] ? (
               <button
-                className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded text-indigo-600 font-medium"
-                onClick={() => addToCart(product)}
+                className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded cursor-pointer"
+                onClick={() => addToCart(product._id)}
               >
-                <img src={assets.cart_icon} alt="cart" />
+                <img src={assets.cart_icon} alt="cart_icon" />
                 Add
               </button>
             ) : (
               <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-indigo-500/25 rounded select-none">
                 <button
-                  onClick={() => removeFromCart(product)}
+                  onClick={() => removeFromCart(product._id)}
                   className="cursor-pointer text-md px-2 h-full"
                 >
                   -
                 </button>
                 <span className="w-5 text-center">{cartItems[product._id]}</span>
                 <button
-                  onClick={() => addToCart(product)}
+                  onClick={() => addToCart(product._id)}
                   className="cursor-pointer text-md px-2 h-full"
                 >
                   +
