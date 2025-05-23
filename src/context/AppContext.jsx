@@ -59,13 +59,31 @@ toast.success("Removed From Cart")
 setCartItems(cartData)
 }
 
-
+// Get Cart Item Count
+const getCartCount = ()=>{
+  let totalCount = 0;
+  for(const item in cartItems){
+    totalCount += cartItems[item];
+  }
+  return totalCount;
+}
+// Get Cart Total Amount
+const getCartAmount = () =>{
+  let totalAmount = 0;
+  for (const items in cartItems ){
+    let itemInfo = products.find((product)=> product._id === items);
+    if(cartItems[items] > 0){
+      totalAmount += itemInfo.offerPrice * cartItems[items]
+  }
+}
+return Math.floor(totalAmount * 100) / 100;
+}
   useEffect(()=>{
       fetchProducts()
   },[])
 
   const value = { navigate, user, setUser, isSeller, setIsSeller, setShowUserLogin, 
-    showUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery }; // ✅ Match naming
+    showUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount }; // ✅ Match naming
 
   return (
     <AppContext.Provider value={value}>
